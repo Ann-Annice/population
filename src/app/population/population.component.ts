@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-population',
@@ -7,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopulationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) {
+    this.fetchData()
+   }
+
+  fetchData=()=>{
+    this.myapi.viewPopulation().subscribe(
+      (data)=>{
+        this.populationData=data
+      }
+    )
+  }
 
 
-populationData={}
+populationData:any={}
   ngOnInit(): void {
   }
 
